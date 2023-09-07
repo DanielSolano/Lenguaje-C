@@ -1,1 +1,2 @@
-# Reporsitorio Lenguaje C
+# Repositorio Lenguaje C
+Daniel Solano
