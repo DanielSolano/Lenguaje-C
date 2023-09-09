@@ -1,5 +1,6 @@
 #include <stdio.h>
 /*
+Practica2_TiposOperadoresYExpresiones
 Solano Meza Angel Daniel Mtr. 372453
 08/09/2023
 Practica2, convierte decimal a binario, utiliza operadores ternarios y crea un inventario
