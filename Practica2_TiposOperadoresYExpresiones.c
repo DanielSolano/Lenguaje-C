@@ -1,4 +1,9 @@
 #include <stdio.h>
+/*
+Solano Meza Angel Daniel Mtr. 372453
+08/09/2023
+Practica2, convierte decimal a binario, utiliza operadores ternarios y crea un inventario
+*/
 //*********************************************************************************************************
 void inventario(void) // Funcion para el inventario
 {
@@ -8,9 +13,9 @@ void inventario(void) // Funcion para el inventario
     printf("Seleccione el tamanio de su inventario: \n");
     scanf("%d", &size);
     int inventario[size];
-    for(int i=0;i<=size;i++)
+    for (int i = 0; i <= size; i++)
     {
-        inventario[i]=0;
+        inventario[i] = 0;
     }
     system("CLS");
     do
@@ -46,11 +51,11 @@ void inventario(void) // Funcion para el inventario
         case 2: // Retirar objetos
             if ((i != 0))
             {
-                continuar = 1; //Reiniciamos continuar
+                continuar = 1; // Reiniciamos continuar
                 while (continuar != 0)
                 {
                     printf("Objeto del espacio %d del inventario removido: \n", i);
-                    inventario[i-1]=0; //Asigna 0 para vaciar el espacio
+                    inventario[i - 1] = 0; // Asigna 0 para vaciar el espacio
                     i--;
                     system("CLS");
                     printf("Quieres retirar otro objeto?: \n1.Si\n0.No\n");
@@ -66,7 +71,7 @@ void inventario(void) // Funcion para el inventario
 
         case 3:
             system("CLS");
-            continuar = 1; //Reiniciamos continuar
+            continuar = 1; // Reiniciamos continuar
             if (i == 0)
             {
                 printf("No imprimimos inventarios vacios\n");
@@ -77,7 +82,7 @@ void inventario(void) // Funcion para el inventario
                 {
                     for (int i = 0; i <= size - 1; i++)
                     {
-                        printf("Espacio %d:| %d |\n",i+1,inventario[i]); //Imprime el numero de espacio y su valor
+                        printf("Espacio %d:| %d |\n", i + 1, inventario[i]); // Imprime el numero de espacio y su valor
                     }
                     printf("1. Continuar\n");
                     scanf("%d", &continuar);
@@ -106,7 +111,7 @@ void inventario(void) // Funcion para el inventario
     } while (op != 0);
 }
 //*********************************************************************************************************
-char printMenu() //Funcion que imprime el menu
+char printMenu() // Funcion que imprime el menu
 {
     char n;
     printf("\n---MENU---\n1.Binario\n2.Calificaciones\n3.Invenario\n0.-Salir\nSeleccione una opcion: ");
@@ -114,7 +119,7 @@ char printMenu() //Funcion que imprime el menu
     return n;
 }
 //*********************************************************************************************************
-char convCalf() // Funcion que returna calificaciones con operaodres ternarios
+char convCalf() // Funcion que returna calificaciones con operadores ternarios
 {
     int calif;
     printf("Escribe tu calificacion (0-100): ");
@@ -125,7 +130,7 @@ char convCalf() // Funcion que returna calificaciones con operaodres ternarios
     }
     else
     {
-        if (calif >= 60) //Si es vayor a 60 pero no a 80 puede ser D o C
+        if (calif >= 60) // Si es vayor a 60 pero no a 80 puede ser D o C
         {
             return printf("Tu calificacion %d es equivalente a %c\n", calif, (calif <= 69) ? 'D' : 'C');
         }
@@ -221,7 +226,7 @@ int main()
 
         case '0':
             system("CLS");
-            printf("Adios mundo\n"); 
+            printf("Adios mundo\n");
             break;
 
         default:
