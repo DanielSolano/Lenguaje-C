@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define N 10
 //*** PROTOTIPOS DE FUNCIONES  ******
 int msges();
 void menu();
@@ -32,20 +31,26 @@ int msges()
 //****************
 void menu()
 {
-    int op, n;
-    if ((op==1) || (op==2))
-    {
-        printf("Cuantas veces se repetira la serie: \n");
-        scanf("%d",&n);
-    }
+    int op, n, cont;
     do
     {
         op = msges();
+        if (op == 1)
+        {
+            system("cls");
+            printf("   FIBONACCI FOR\n");
+            printf("Cuantas veces se repetira la serie: \n");
+            scanf("%d", &n);
+        }
         switch (op)
         {
         case 1:
             Fibonacci(n);
+            system("cls");
+            printf("Desea continuar\n1.Si\n0.Salir\n");
+            scanf("%d", &cont);
             break;
+
         case 2:
             Fibonacci_Rec(n);
             break;
@@ -58,13 +63,12 @@ void menu()
 }
 
 //*********************
-void Fibonacci(void)
+void Fibonacci(int n)
 {
     //  VARIALES LOCALES
-    int ante, sig, resul, n, i;
+    int ante, sig, resul, i;
     system("CLS");
     //  AQUI DESARROLLO PROGRAMA
-    printf("   FIBONACCI FOR\n");
     ante = -1;
     sig = 1;
     system("CLS");
@@ -79,7 +83,7 @@ void Fibonacci(void)
 }
 
 //*************************
-void Factorial(void)
+void Fibonacci_Rec(int n)
 {
 
     //  VARIALES LOCALES
