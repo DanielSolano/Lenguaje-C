@@ -1,3 +1,9 @@
+/*
+Nombre del archivo: Practica3_JuegoDeAdivinanza.cpp
+Autor: Angel Daniel Solano Meza
+Fecha de creación: 13 de septiembre de 2023
+Descripción: Este es un juego de adivinar el numero
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -39,6 +45,7 @@ int main()
         switch(n)
         {
             case 1:
+                intentos = 0;
                 goto inicio;
                 break;
             case 0:
