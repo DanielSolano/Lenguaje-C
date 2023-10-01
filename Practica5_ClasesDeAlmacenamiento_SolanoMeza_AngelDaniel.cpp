@@ -121,6 +121,10 @@ void iniciarCarrera(void)
     {
         printf("\n    GANADOR: LEWIS \n");
     }
+    if ((tiempo1 == tiempo2) || (tiempo1 == tiempo3) || (tiempo2 == tiempo3))
+    {
+        printf("    EMPATE\n");
+    }
     sleep(1);
     printf("\nPILOTO: Checo\nVELOCIDAD: %d\nTIEMPO: %f\n", Checo, tiempo1);
     sleep(1);
