@@ -67,6 +67,7 @@ void Loteria(void)
     //  VARIALES LOCALES
     static int ganador = rand() % 100 + 1;
     int numero;
+
     system("CLS");
     //  AQUI DESARROLLO PROGRAMA
     printf("   LOTERIA\n");
