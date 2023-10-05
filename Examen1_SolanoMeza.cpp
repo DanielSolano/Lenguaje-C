@@ -11,17 +11,23 @@ int main()
             scanf("%d", &n);
         } while (n < 1);
 
-        for (i = 6; i <= n; i++)
+        for (i = 1; i < n; i++)
         {
-            suma = 0;
-            for (j = 1; j <= i; j++)
+            if (i % 2 == 0)
             {
-                if (i % j == 0)
+                suma = 0;
+                for (j = 1; j < i; j++)
                 {
-                    suma += j;
+                    if (i % j == 0)
+                    {
+                        suma += j;
+                    }
+                }
+                if (suma == i)
+                {
+                    printf("El numero %d es perfecto\nSuma: %d\n", i, suma);
                 }
             }
-            printf("%d es un numero perfecto\n%d\n", i);
         }
         printf("Desea hacerlo de nuevo?\n1.Si 0.No\n");
         scanf("%d", &op);
