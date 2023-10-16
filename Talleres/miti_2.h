@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "nombres.h"
 
 int Validar(int inferior, int superior);
 void LlenarVector(int vector[], int m, int ri, int rf, int op);
