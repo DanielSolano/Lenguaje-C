@@ -11,7 +11,7 @@ int main()
             scanf("%d", &n);
         } while (n < 1);
 
-        for (i = 1; i < n; i++)
+        for (i = 1; i <= n; i++)
         {
             if (i % 2 == 0)
             {
