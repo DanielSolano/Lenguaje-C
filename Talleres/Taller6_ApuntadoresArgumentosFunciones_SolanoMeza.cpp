@@ -1,4 +1,5 @@
-#include "miti_2.h"
+#include "libreria.h"
+
 int main()
 {
 
