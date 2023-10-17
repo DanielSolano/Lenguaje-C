@@ -65,7 +65,7 @@ void LlenarVector(int vector[], int m, int ri, int rf, int op)
         for (i = 0; i < m; i++)
         {
             printf("    Espacio [%d]\n", i + 1);
-            vector[i] = Validar(30, 70); // Valida la entrada manual
+            vector[i] = Validar(ri, rf); // Valida la entrada manual
         }
     }
 }
