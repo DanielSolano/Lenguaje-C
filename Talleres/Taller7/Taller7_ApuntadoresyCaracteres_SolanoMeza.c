@@ -1,3 +1,8 @@
+/*
+    Nombre del archivo: Taller7_ApuntadoresyCaracteres_SolanoMeza.c
+    Autor: Solano Meza Angel Daniel
+    Fecha de creación: 25 de octubre de 2023
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
