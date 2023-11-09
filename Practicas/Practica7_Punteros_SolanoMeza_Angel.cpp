@@ -1,5 +1,5 @@
 /*
-    Nombre del archivo: Practica7_Punteros_HaroCalvo_Fernando.c
+    Nombre del archivo: Practica7_Punteros_SolanoMeza_Fernando.c
     Autor: Solano Meza Angel Daniel
     Fecha de creación: 8 de noviembre de 2023
 */
@@ -11,7 +11,6 @@
 
 #define PALABRAS 5  
 
-// Prototipos de funciones
 void argumentos(char *argv[]);
 void matriz();
 void ordenacion();
