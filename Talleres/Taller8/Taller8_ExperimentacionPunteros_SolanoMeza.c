@@ -1,5 +1,5 @@
 /*
-    NOmbre del archivo: Taller8_ExperimentacionConPunteros.c
+    Nombre del archivo: Taller8_ExperimentacionConPunteros.c
     Autor: Solano Meza Angel Daniel
     Fecha de creación: 07 de Noviembre de 2023
 */
