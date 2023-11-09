@@ -1,16 +1,14 @@
 /*
     Nombre del archivo: Practica7_Punteros_HaroCalvo_Fernando.c
-    Autor: Fernando Haro Calvo
-    Fecha de creación: 6 de noviembre de 2023
+    Autor: Solano Meza Angel Daniel
+    Fecha de creación: 8 de noviembre de 2023
 */
 
-// Librerias
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
-// Constantes
 #define PALABRAS 5  
 
 // Prototipos de funciones
