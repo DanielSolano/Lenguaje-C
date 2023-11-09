@@ -1,5 +1,5 @@
 /*
-    Nombre del archivo: Practica7_Punteros_SolanoMeza_Fernando.c
+    Nombre del archivo: Practica7_Punteros_SolanoMeza_AngelDaniel.c
     Autor: Solano Meza Angel Daniel
     Fecha de creación: 8 de noviembre de 2023
 */
