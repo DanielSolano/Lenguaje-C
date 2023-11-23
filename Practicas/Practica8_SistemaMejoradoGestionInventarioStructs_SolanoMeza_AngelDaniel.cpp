@@ -1,11 +1,14 @@
 #include "junior.h"
-#define N 10
-
+#define N 100
+#define MAX 1000
 int msges();
 void menu();
 void Mostrar(TReg inventario[], int i);
 int Total(TReg inventario[], int i);
+int CrearBIN(TReg vect[], int i, char nombre[]);
+int CargarBIN(TReg vect[], int *i, char nombre[], int *elementos, int max);
 TReg AgregarProducto(void);
+void NombreArch(char archivo[]);
 
 int main()
 {
@@ -22,6 +25,9 @@ int msges()
     printf("2.- RETIRAR PRODUCTOS \n");
     printf("3.- MOSTRAR PRODUCTOS \n");
     printf("4.- CALCULAR VALOR DEL INVENTARIO \n");
+    printf("5.- ORDENAR \n");
+    printf("6.- CREAR ARCHIVO \n");
+    printf("7.- CARGAR ARCHIVO  \n");
     printf("0.- SALIR  \n");
     printf("ESCOGE UNA OPCION: ");
     scanf("%d", &op);
@@ -30,10 +36,12 @@ int msges()
 
 void menu()
 {
-    int op, i, total, apagar, encontrado, confirmar;
-    TReg Inventario[100];
+    int op, i, total, apagar, encontrado, confirmar, elementos, ordenar, cargado;
+    char archivo[30];
+    TReg Inventario[N];
     TReg producto;
     i = 0;
+    elementos = 0;
     do
     {
         op = msges();
@@ -46,30 +54,37 @@ void menu()
             {
                 system("cls");
                 printf("CODIGO DE PRODUCTO REPETIDO, INGRESELO DE NUEVO\n");
-                producto.key = Validar(1, 20000);
+                producto.key = Validar(1, 1000);
                 producto.Codigo = producto.key;
             }
-            if (i <= N)
+            elementos += producto.Cantidad;
+            if (elementos <= N)
             {
                 Inventario[i++] = producto;
                 printf("PRODUCTO AGREGADO AL INVENTARIO\n");
             }
+            else
+            {
+                elementos -= producto.Cantidad;
+                printf("CANTIDAD DE ELEMENTOS SOBREPASAN LA CAPACIDAD\n");
+            }
+            system("pause");
             break;
         case 2:
             system("CLS");
-            if (i == 0)
+            if (elementos == 0)
             {
-                printf("INCAPAZ DE ELIMINAR REGISTROS VACIOS\n");
+                printf("INVENTARIO VACIO\n");
             }
             else
             {
+
                 printf("CODIGO DE PRODUCTO A RETIRAR\n");
                 apagar = Validar(1, 2000);
                 encontrado = BusquedaTReg(Inventario, i, apagar);
-
                 if (encontrado == -1)
                 {
-                    printf("NUMERO DE EMPLEADO NO EXISTENTE\n");
+                    printf("CODIGO DE PRODUCTO NO EXISTE\n");
                 }
                 else // Encontrada
                 {
@@ -94,6 +109,7 @@ void menu()
                         if (confirmar == 1)
                         {
                             Inventario[encontrado].Status = 0;
+                            elementos -= Inventario[encontrado].Cantidad;
                             system("CLS");
                             printf("PRODUCTO ELIMINADO\n");
                         }
@@ -108,12 +124,84 @@ void menu()
             system("PAUSE");
             break;
         case 3:
-            Mostrar(Inventario, i);
+            system("cls");
+            if (elementos == 0)
+            {
+                printf("INVENTARIO VACIO\n");
+            }
+            else
+            {
+                Mostrar(Inventario, i);
+            }
+            system("pause");
             break;
         case 4:
             system("cls");
-            total = Total(Inventario, i);
-            printf("EL VALOR TOTAL DEL INVENTARIO ES: %d\n", total);
+            if (elementos == 0)
+            {
+                printf("INVENTARIO VACIO\n");
+            }
+            else
+            {
+                total = Total(Inventario, i);
+                printf("EL VALOR TOTAL DEL INVENTARIO ES: %d\n", total);
+            }
+            system("pause");
+            break;
+        case 5:
+            system("cls");
+            printf("SELECCIONE CAMPO POR EL CUAL ORDENAR: \n1. CODIGO DE PRODUCTO\n2. CANTIDAD DE PRODUCTO\n3. PRECIO DEL PRODUCTO\n");
+            ordenar = Validar(1, 3);
+            switch (ordenar)
+            {
+            case 1:
+                for (int j = 0; j < i; j++)
+                {
+                    Inventario[j].key = Inventario[j].Codigo;
+                }
+                OrdenarTReg(Inventario, i);
+                printf("INVENTARIO ORDENADO POR CODIGO DE PRODUCTO\n");
+                break;
+            case 2:
+                for (int j = 0; j < i; j++)
+                {
+                    Inventario[j].key = Inventario[j].Cantidad;
+                }
+                OrdenarTReg(Inventario, i);
+                for (int j = 0; j < i; j++)
+                {
+                    Inventario[j].key = Inventario[j].Codigo;
+                }
+                printf("INVENTARIO ORDENADO POR CANTIDAD DE PRODUCTO\n");
+                break;
+            case 3:
+                for (int j = 0; j < i; j++)
+                {
+                    Inventario[j].key = Inventario[j].Precio;
+                }
+                OrdenarTReg(Inventario, i);
+                for (int j = 0; j < i; j++)
+                {
+                    Inventario[j].key = Inventario[j].Codigo;
+                }
+                printf("INVENTARIO ORDENADO POR PRECIO DEL PRODUCTO\n");
+                break;
+            }
+            system("pause");
+            break;
+        case 6:
+            system("cls");
+            NombreArch(archivo);
+            if (CrearBIN(Inventario, elementos, archivo))
+            {
+                printf("ARCHIVO CREADO CON EXITO\n");
+            }
+            system("pause");
+            break;
+        case 7:
+            system("cls");
+            NombreArch(archivo);
+            cargado = CargarBIN(Inventario, &i, archivo, &elementos, MAX);
             system("pause");
             break;
         }
@@ -147,14 +235,15 @@ TReg AgregarProducto(void)
 
 void Mostrar(TReg inventario[], int i)
 {
-    system("cls");
     int j;
     printf("|  CODIGO DE PRODUCTO  |  CANTIDAD  |  NOMBRE DE PRODUCTO  |  PRECIO  |\n");
     for (j = 0; j < i; j++)
     {
-        printf("            %-4d          %5-d             %-15s     %-8d\n", inventario[j].Codigo, inventario[j].Cantidad, inventario[j].Producto, inventario[j].Precio);
+        if (inventario[j].Status == 1)
+        {
+            printf("            %-4d          %5-d             %-15s     %-8d\n", inventario[j].Codigo, inventario[j].Cantidad, inventario[j].Producto, inventario[j].Precio);
+        }
     }
-    system("pause");
 }
 
 int Total(TReg inventario[], int i)
@@ -163,7 +252,72 @@ int Total(TReg inventario[], int i)
     total = 0;
     for (j = 0; j < i; j++)
     {
-        total += inventario[j].Cantidad * inventario[j].Precio;
+        if (inventario[j].Status == 1)
+        {
+            total += inventario[j].Cantidad * inventario[j].Precio;
+        }
     }
     return total;
+}
+
+int CrearBIN(TReg vect[], int n, char nom[])
+{
+    char archivo[30];
+    strcpy(archivo, nom);
+    TReg reg;
+    int i;
+    strcat(archivo, ".dll");
+    FILE *fa;
+    fa = fopen(archivo, "ab");
+    for (i = 0; i < n; i++)
+    {
+        reg = vect[i];
+        fwrite(&reg, sizeof(TReg), 1, fa);
+    }
+    fclose(fa);
+    return 1;
+}
+
+void NombreArch(char archivo[])
+{
+
+    system("CLS");
+    printf("NOMBRE DEL ARCHIVO SIN EXTENSION: \n");
+    fflush(stdin);
+    gets(archivo);
+}
+
+int CargarBIN(TReg vect[], int *i, char nombre[], int *elementos, int max)
+{
+    char archivo[30];
+    FILE *fa;
+    TReg reg;
+    strcpy(archivo, nombre);
+    strcat(archivo, ".dll");
+    fa = fopen(archivo, "rb");
+    if (fa)
+    {
+        while (fread(&reg, sizeof(TReg), 1, fa))
+        {
+            *elementos += reg.Cantidad;
+            if ((*elementos) <= max)
+            {
+                vect[(*i)++] = reg;
+            }
+            else
+            {
+                *elementos -= reg.Cantidad;
+                printf("ELEMENTOS SOBREPASAN CAPACIDAD DE INVENTARIO\nINVENTARIO CARGADO HASTA EL LIMITE\n");
+                return -1;
+            }
+        }
+        fclose(fa);
+        printf("ARCHIVO CARGADO CON EXITO\n");
+        return 1;
+    }
+    else
+    {
+        printf("ERROR AL LEER EL ARCHIVO\n");
+        return 0;
+    }
 }
