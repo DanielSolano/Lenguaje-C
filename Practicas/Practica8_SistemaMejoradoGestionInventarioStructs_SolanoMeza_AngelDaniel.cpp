@@ -1,3 +1,9 @@
+/*
+Nombre del archivo: Practica8_SistemaMejoradoGestionInventarioStructs_SolanoMeza_AngelDaniel.cpp.c
+Autor: Solano Meza Angel Daniel
+Fecha de creación: 22 de Noviembre de 2023
+Descripción: Este archivo contiene el código principal de mi programa.
+*/
 #include "junior.h"
 #define N 100
 #define MAX 1000
@@ -27,7 +33,6 @@ int msges()
     printf("4.- CALCULAR VALOR DEL INVENTARIO \n");
     printf("5.- ORDENAR \n");
     printf("6.- CREAR ARCHIVO \n");
-    printf("7.- CARGAR ARCHIVO  \n");
     printf("0.- SALIR  \n");
     printf("ESCOGE UNA OPCION: ");
     scanf("%d", &op);
@@ -36,7 +41,7 @@ int msges()
 
 void menu()
 {
-    int op, i, total, apagar, encontrado, confirmar, elementos, ordenar, cargado;
+    int op, i, total, apagar, encontrado, confirmar, elementos, ordenar;
     char archivo[30];
     TReg Inventario[N];
     TReg producto;
@@ -198,17 +203,16 @@ void menu()
             }
             system("pause");
             break;
-        case 7:
-            system("cls");
-            NombreArch(archivo);
-            cargado = CargarBIN(Inventario, &i, archivo, &elementos, MAX);
-            system("pause");
-            break;
         }
 
     } while (op != 0);
 }
-
+/*
+Función: AgregarProducto
+Descripción: Esta función genera un registro de producto.
+Parámetros: Void
+Valor de retorno: Un registro llenado.
+*/
 TReg AgregarProducto(void)
 {
     TReg elemento;
@@ -232,7 +236,12 @@ TReg AgregarProducto(void)
 
     return elemento;
 }
-
+/*
+Función: Mostrar
+Descripción: Esta función muestra los registros de productos.
+Parámetros: Void
+Valor de retorno: Void.
+*/
 void Mostrar(TReg inventario[], int i)
 {
     int j;
@@ -245,7 +254,12 @@ void Mostrar(TReg inventario[], int i)
         }
     }
 }
-
+/*
+Función: Total
+Descripción: Esta función Calcula el valor total del inventario.
+Parámetros: Vector de registros e indice que indica hasta donde se lleno el vector
+Valor de retorno: Total del valor de los registros
+*/
 int Total(TReg inventario[], int i)
 {
     int j, total;
@@ -259,7 +273,12 @@ int Total(TReg inventario[], int i)
     }
     return total;
 }
-
+/*
+Función: CrearBin
+Descripción: Esta función crea un archivo binario.
+Parámetros: Vector de registros, indice que indica hasta donde se lleno el vector y nombre del archivo
+Valor de retorno: Void, solo crea el archivo en output
+*/
 int CrearBIN(TReg vect[], int n, char nom[])
 {
     char archivo[30];
@@ -285,39 +304,4 @@ void NombreArch(char archivo[])
     printf("NOMBRE DEL ARCHIVO SIN EXTENSION: \n");
     fflush(stdin);
     gets(archivo);
-}
-
-int CargarBIN(TReg vect[], int *i, char nombre[], int *elementos, int max)
-{
-    char archivo[30];
-    FILE *fa;
-    TReg reg;
-    strcpy(archivo, nombre);
-    strcat(archivo, ".dll");
-    fa = fopen(archivo, "rb");
-    if (fa)
-    {
-        while (fread(&reg, sizeof(TReg), 1, fa))
-        {
-            *elementos += reg.Cantidad;
-            if ((*elementos) <= max)
-            {
-                vect[(*i)++] = reg;
-            }
-            else
-            {
-                *elementos -= reg.Cantidad;
-                printf("ELEMENTOS SOBREPASAN CAPACIDAD DE INVENTARIO\nINVENTARIO CARGADO HASTA EL LIMITE\n");
-                return -1;
-            }
-        }
-        fclose(fa);
-        printf("ARCHIVO CARGADO CON EXITO\n");
-        return 1;
-    }
-    else
-    {
-        printf("ERROR AL LEER EL ARCHIVO\n");
-        return 0;
-    }
 }
